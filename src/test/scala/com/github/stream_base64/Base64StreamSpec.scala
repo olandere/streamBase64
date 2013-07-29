@@ -18,7 +18,6 @@ package com.github.stream_base64
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers
 
-
 class Base64StreamSpec extends FlatSpec with ShouldMatchers {
 
   "Base64Stream" should "correctly encode" in {

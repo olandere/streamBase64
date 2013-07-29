@@ -27,9 +27,7 @@ object Base64Stream {
   val mask3 = 63 << 6
   val mask4 = 63
 
-  val revMask1 = 255 << 16
-  val revMask2 = 255 << 8
-  val revMask3 = 255
+  val revMask = 0xff
 
   val EQ = '='
 
@@ -47,6 +45,7 @@ object Base64Stream {
         }
       }
     }
+
     if (bytes.isEmpty) Stream.empty[Char]
     else {
       val (i, n) = bytes match {
@@ -68,9 +67,9 @@ object Base64Stream {
       val a #:: b #:: c #:: d #:: _ = bytes
       val n = if (c == EQ) 1 else if (d == EQ) 2 else 3
       val i = (((((reverseIndex(a) << 6) + reverseIndex(b)) << 6) + checkForEqSign(c)) << 6) + checkForEqSign(d)
-      val x = ((i & revMask1) >> 16).toByte
-      val y = ((i & revMask2) >> 8).toByte
-      val z = (i & revMask3).toByte
+      val x = (i >> 16).toByte
+      val y = ((i >> 8) & revMask).toByte
+      val z = (i & revMask).toByte
       n match {
         case 1 => x #:: Stream.empty[Byte]
         case 2 => x #:: y #:: Stream.empty[Byte]
