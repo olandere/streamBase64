@@ -50,8 +50,8 @@ class Base64StreamSpec extends FlatSpec with ShouldMatchers {
   }
 
   "Base64Stream" should "correctly handle empty streams" in {
-    Base64Stream.encode(Stream.empty[Byte]) should equal(Stream.empty[Byte])
-    Base64Stream.decode(Stream.empty[Char]) should equal(Stream.empty[Char])
+    Base64Stream.encode(Stream.empty[Byte]) should equal(Stream.empty[Char])
+    Base64Stream.decode(Stream.empty[Char]) should equal(Stream.empty[Byte])
   }
 
   "Base64Stream" should "correctly handle small streams" in {
