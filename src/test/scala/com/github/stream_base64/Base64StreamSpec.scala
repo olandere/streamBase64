@@ -22,8 +22,7 @@ class Base64StreamSpec extends FlatSpec with ShouldMatchers {
 
   "Base64Stream" should "correctly encode" in {
     val result = Base64Stream.encode("testing".getBytes.toStream)
-    result.foreach(print(_))
-    println()
+    result.mkString should equal("dGVzdGluZw==")
   }
 
   "Base64Stream" should "not stack overflow" in {

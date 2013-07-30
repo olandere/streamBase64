@@ -22,10 +22,7 @@ object Base64Stream {
   val indexTable = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toArray
   val reverseIndex = indexTable.zipWithIndex.toMap
 
-  val mask1 = 63 << 18
-  val mask2 = 63 << 12
-  val mask3 = 63 << 6
-  val mask4 = 63
+  val mask = 0x3f
 
   val revMask = 0xff
 
@@ -33,14 +30,14 @@ object Base64Stream {
 
   def encode(bytes: Stream[Byte]): Stream[Char] = {
     def lookupBase64Chars(i: Int, n: Int) = {
-      val a = indexTable((i & mask1) >> 18)
-      val b = indexTable((i & mask2) >> 12)
+      val a = indexTable(i >> 18)
+      val b = indexTable((i >> 12) & mask)
       if (n == 1) (a, b, EQ, EQ)
       else {
-        val c = indexTable((i & mask3) >> 6)
+        val c = indexTable((i >> 6) & mask)
         if (n == 2) (a, b, c, EQ)
         else {
-          val d = indexTable(i & mask4)
+          val d = indexTable(i & mask)
           (a, b, c, d)
         }
       }
