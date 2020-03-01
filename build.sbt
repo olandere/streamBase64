@@ -1,14 +1,13 @@
 name := "streamBase64"
 
-organization <<= name
+organization := "com.github.stream_base64"
 
 version := "1.0"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.12.10"
 
-scalacOptions ++= Seq("-deprecation", "-optimise", "-feature")
+scalacOptions ++= Seq("-deprecation", "-feature")
 
 libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "1.9.1" % "test",
-    "org.scala-lang" % "scala-reflect" % "2.10.2"
+    "org.scalatest" %% "scalatest" % "3.1.1" % "test"
 )

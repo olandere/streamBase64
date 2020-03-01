@@ -15,10 +15,10 @@
  */
 package com.github.stream_base64
 
-import org.scalatest.FlatSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class Base64StreamSpec extends FlatSpec with ShouldMatchers {
+class Base64StreamSpec extends AnyFlatSpec with Matchers {
 
   "Base64Stream" should "correctly encode" in {
     val result = Base64Stream.encode("testing".getBytes.toStream)
